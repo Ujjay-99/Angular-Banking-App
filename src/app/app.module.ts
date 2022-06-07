@@ -8,18 +8,20 @@ import { UserComponent } from './user/user.component';
 
 import { RegisterComponent } from './user/register/register.component';
 import { LoginComponent } from './user/login/login.component';
-import { AdminComponent } from './admin/admin.component';
+import { AdminComponent } from './admin/login/admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataService } from './Service/data.service';
+import { AdminRegisterComponent } from './admin/admin-register/admin-register.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-  LoginComponent,
+    LoginComponent,
     RegisterComponent,
     AdminComponent,
+    AdminRegisterComponent
  
   ],
   imports: [

@@ -1,8 +1,9 @@
 export interface IUserRegister{
-    FirstName:string
-    LastName:string
-    Balance:number
-    Email:string
-    Password:string
-    ConfirmPassword:string
+    firstName:string
+    lastName:string
+    balance:number
+    email:string
+    password:string
+    confirmPassword:string
+    role:string
 }

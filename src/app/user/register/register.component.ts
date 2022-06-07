@@ -10,71 +10,57 @@ import { IUserRegister } from "src/app/IUserRegister";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  data = false;  
-  registerForm: any; 
-  massage:string | undefined; 
-  
-  constructor( private formbulider: FormBuilder,private dataService: DataService) { 
+
+  FirstName:string = "";
+  LastName:string = "";
+  Balance:number = 0;
+  Email:string = "";
+  Password:string = "";
+  ConfirmPassword:string = "";
+  IsSucceeded:boolean = false;
+
+  constructor(private dataService: DataService) { 
     
   }
 
   ngOnInit(): void {
-    // this.registerForm = new FormGroup({
-    //   FirstName: new FormControl(''),
-    //   LastName: new FormControl(''),
-    //   Email: new FormControl(''),
-    //   Balance:new FormControl(''),
-    //   Password: new FormControl(''),
-    //   ConfirmPassword: new FormControl('')
-    // });
-
-    this.registerForm=this.formbulider.group({
-      UserName: ['', [Validators.required]],
-      FirstName: ['', [Validators.required]],
-      LastName: ['', [Validators.required]],
-      Email: ['', [Validators.required]],
-      Balance:['', [Validators.required]],
-      Password: ['', [Validators.required]],
-      ConfirmPassword: ['', [Validators.required]]
-    })
   }
-  onFormSubmit(form: NgForm)    
-  { 
-    console.log("hit register");
+
+  register(){
+    const user: IUserRegister = {
+      firstName: this.FirstName,
+      lastName: this.LastName,
+      email: this.Email,
+      balance:this.Balance,
+      password: this.Password,
+      confirmPassword: this.ConfirmPassword,
+      role:"User"
+    };
+
+  this.dataService.CreateUser(user).subscribe(u=> this.IsSucceeded = true);
+  }
+}
+  // onFormSubmit(form: NgForm)    
+  // { 
+  //   console.log("hit register");
        
-    const user = this.registerForm.value;    
-    this.registerNew(user);    
-  } 
-  registerNew(register:IUserRegister)    
-  {    
-  this.dataService.CreateUser1(register).subscribe(    
-    ()=>    
-    {    
-      this.data = true;    
-      this.massage = 'Data saved Successfully';    
-      this.registerForm.reset();    
-    });    
-  }   
-  // public validateControl = (controlName: string) => {
-  //   return this.registerForm.get(controlName)?.invalid && this.registerForm.get(controlName)?.touched
-  // }
+  //   const user = this.registerForm.value;    
+  //   this.registerNew(user);    
+  // } 
+  // registerNew(register:IUserRegister)    
+  // {    
+  // this.dataService.CreateUser1(register).subscribe(    
+  //   ()=>    
+  //   {    
+  //     this.data = true;    
+  //     this.massage = 'Data saved Successfully';    
+  //     this.registerForm.reset();    
+  //   });    
+  // } 
 //   public registerUser = (registerFormValue: any) => {
 //     const formValues = { ...registerFormValue };
-//     const user: IUserRegister = {
-//       FirstName: formValues.firstName,
-//       LastName: formValues.lastName,
-//       Email: formValues.email,
-//       Balance:formValues.balance,
-//       Password: formValues.password,
-//       ConfirmPassword: formValues.confirm
-//     };
+    
 
-// this.dataService.RegisterUser("http://localhost:3492/api/user/register", user)
-//     .subscribe({
-//       next: (_: any) => console.log("Successful registration"),
-//       error: (err: HttpErrorResponse) => console.log(err.error.errors)
-//     })
-}
 
 
 
