@@ -3,5 +3,6 @@ export interface IUserRegister{
     LastName:string
     Balance:number
     Email:string
-    
+    Password:string
+    ConfirmPassword:string
 }
