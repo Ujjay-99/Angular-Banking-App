@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ngxCsv } from 'ngx-csv';
 import { ITransaction } from 'src/app/ITransaction';
 import { IUserRegister } from 'src/app/IUserRegister';
 import { AuthService } from 'src/app/Service/auth.service';
@@ -69,4 +70,20 @@ export class UserComponent implements OnInit {
     }
     this.dataService.DoTransaction(this.userID, payload)
   }
+  results(){
+    var options = { 
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true, 
+      showTitle: true,
+      title: `${this.user.firstName} ${this.user.lastName}`,
+      useBom: true,
+      noDownload: false,
+      headers: ["Id", "UserId", "Date","Amount","Transaction Type"]
+    };
+   
+    new ngxCsv(this.transactions, `${this.user.firstName}'s PassBook`, options);
+    // new ngxCsv(this.transactions,  `${this.user.firstName}'s PassBook`);
+    }
 }

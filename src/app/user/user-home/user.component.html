@@ -22,6 +22,7 @@
     </tbody>
   </table>
 </div>
+<button type="button" class="btn btn-success" csv-header="['Id', 'Transaction-Id', 'Date','Amount']"(click)="results()">Export csv</button>
 <div class="transact">
     <label>Enter Amount:</label>
     <input type="number" placeholder="Enter Amount" [(ngModel)] = 'amount'>
