@@ -1,8 +1,9 @@
+
+
 export interface ITransaction{
-    amount: number,
-    created: Date,
-    id: number,
-    transactionType: string;
-    user: string,
-    userId: string;
+    amount: number
+    created: string
+    id: number
+    transactionType: string
+    userId: string
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ITransaction } from 'src/app/ITransaction';
 import { IUserRegister } from 'src/app/IUserRegister';
@@ -14,8 +15,15 @@ export class UserComponent implements OnInit {
 
   tokenPayload:any;
   token:any;
+  transactions:ITransaction[] = Array<ITransaction>();
+  output:any;
+  jwtHelper: JwtHelperService = new JwtHelperService();
+  transactionType:string ="D";
+  amount:number = 0;
+  userID:string = "";
+
   user:IUserRegister = {
-    firstName: "sfsdfs",
+    firstName: "",
     lastName: "",
     balance : 0,
     email :"",
@@ -23,23 +31,19 @@ export class UserComponent implements OnInit {
     confirmPassword : "",
     role: "",
   };
-  transactions:ITransaction[] = Array<ITransaction>();
 
-  output:any;
-  jwtHelper: JwtHelperService = new JwtHelperService();
-
-  constructor(private authService: AuthService, private dataService: DataService) {
+  constructor(private authService: AuthService, private dataService: DataService, private router:Router) {
     this.token = authService.getToken("accessToken");
     this.tokenPayload = JSON.stringify(this.jwtHelper.decodeToken(this.token));
     this.output = JSON.parse(this.tokenPayload);
-    console.log(this.tokenPayload);
+    this.userID = this.output['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
 
     dataService.GetUser(this.output['email']).subscribe(u => {
       this.user = u[0];
       
     });
     
-    dataService.GetTransactions(this.output['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
+    dataService.GetTransactions(this.userID)
             .subscribe(l => {
               l.forEach(i=>{
                 this.transactions.push(i);
@@ -48,6 +52,21 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.authService.getToken("accessToken")==null){
+      this.router.navigate(['/Login'])
+    }
   }
 
+  onSubmit() {
+    console.log("Clicked.");
+    
+    const payload = {
+      amount: this.amount,
+      created: Date.UTC.toString(),
+      id: 0,
+      transactionType: this.transactionType,
+      userId: this.userID
+    }
+    this.dataService.DoTransaction(this.userID, payload)
+  }
 }

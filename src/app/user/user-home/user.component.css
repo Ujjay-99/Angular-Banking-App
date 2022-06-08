@@ -8,3 +8,9 @@
     margin-top: 20px;
     max-width: 700px;
 }
+
+.name {
+    color: #C81D25;
+    font-weight: 700;
+    text-shadow: 4px 6px 1px rgb(255, 209, 209);
+}

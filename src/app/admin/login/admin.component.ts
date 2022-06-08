@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
       email:this.email,
       password:this.password
     }
-    this.data.Login(payload).subscribe({
+    this.data.AdminLogin(payload).subscribe({
       next: (response) => {
         const token = (<any>response).token;
         const refreshToken = (<any>response).refreshToken;
