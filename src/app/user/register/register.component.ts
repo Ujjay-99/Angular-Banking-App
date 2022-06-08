@@ -37,29 +37,12 @@ export class RegisterComponent implements OnInit {
       role:"User"
     };
 
-  this.dataService.CreateUser(user).subscribe(u=> this.IsSucceeded = true);
+  this.dataService.CreateUser(user).subscribe(u=> {
+    this.IsSucceeded = true;
+    alert("Registration Successfull.");
+  });
   }
 }
-  // onFormSubmit(form: NgForm)    
-  // { 
-  //   console.log("hit register");
-       
-  //   const user = this.registerForm.value;    
-  //   this.registerNew(user);    
-  // } 
-  // registerNew(register:IUserRegister)    
-  // {    
-  // this.dataService.CreateUser1(register).subscribe(    
-  //   ()=>    
-  //   {    
-  //     this.data = true;    
-  //     this.massage = 'Data saved Successfully';    
-  //     this.registerForm.reset();    
-  //   });    
-  // } 
-//   public registerUser = (registerFormValue: any) => {
-//     const formValues = { ...registerFormValue };
-    
 
 
 

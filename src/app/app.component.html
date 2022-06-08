@@ -1,25 +1,59 @@
-<div class="container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" routerLink="#">Welcome Bank</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+ 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">Core Banking Application</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      
-      <li class="nav-item">
-        <a class="nav-link" routerLink="Login">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="Admin">Admin</a>
-      </li>
-    </ul>
-    
+    <div class="collapse navbar-collapse" id="navbarsExample07">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active" *ngIf="!isUserAuthorized()">
+          <a class="nav-link" [routerLink]='["/Login"]' >User Login</a>
+        </li>
+        <li class="nav-item" *ngIf="!isUserAuthorized()">
+          <a class="nav-link" [routerLink]='["/Admin"]' >Admin Login</a>
+        </li>
+        <li class="flex 1 1 auto" *ngIf="isUserAuthorized()">
+          <button class="btn btn-primary" (click)="logout()">Logout</button>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
-
-
-</div>
-
 <router-outlet></router-outlet>
+<footer>
+  <nav class="navbar navbar-light bg-white mt-5 fixed-bottom">
+    <div class="navbar-expand m-auto navbar-text">
+      Developed by <b>Suyash & Ujjay</b>
+    </div>
+  </nav>
+</footer>
+
+
+<!-- <header>
+  <nav class='stroke navbar-expand-sm navbar-toggleable-sm navbar-light bg-
+white border-bottom box-shadow mb-3'>
+    <div class="container">
+      <a class="nav-link text-dark" style="color: 
+black; font-weight: bold; font-size: large;"
+        [routerLink]='["/"]'>Home</a>
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+        <ul class="navbar-nav flex-grow">
+          <!-- <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/addresses"]'>Address Book</a>
+          </li> -->
+          <!-- <li *ngIf="!isUserAuthorized()" class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/Admin"]'>Admin Login</a>
+          </li>
+          <li *ngIf="!isUserAuthorized()" class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/Login"]'>User Login</a>
+          </li>
+          <li *ngIf="isUserAuthorized()" class="logout" (click)="logout()">
+            <i class="fa fa-sign-out" aria-hidden="true">Logout</i>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header> -->

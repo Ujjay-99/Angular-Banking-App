@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ITransaction } from '../ITransaction';
 import { IUserRegister } from '../IUserRegister';
 
 
@@ -10,14 +11,22 @@ import { IUserRegister } from '../IUserRegister';
 export class DataService {
   header : any;  
   constructor(private http: HttpClient) { }
-  // RegisterUser(data:any ,body: IUserRegister) {
-  //   let url = `http://localhost:5000/api/user/register`;
-  //   return this.http.post(url,data)
-  // }
-  CreateUser(register:IUserRegister)  
-  {  
-    //const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+
+  CreateUser(register:IUserRegister){  
     console.log(register);  
-    return this.http.post(`http://localhost:5000/api/user/register`, register)  
+    return this.http.post(`http://localhost:5000/api/user/register`, register)
   } 
+
+  Login(login:any){  
+    console.log(login);  
+    return this.http.post(`http://localhost:5000/api/user/login`, login)
+  } 
+
+  GetUser(email:string){
+    return this.http.get<IUserRegister[]>(`http://localhost:5000/api/User/getByEmail/${email}`)
+  }
+
+  GetTransactions(UserID:string){
+    return this.http.get<ITransaction[]>(`http://localhost:5000/api/Transactions/getall/${UserID}`)
+  }
 }
