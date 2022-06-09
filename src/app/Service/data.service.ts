@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/commo
 import { Injectable } from '@angular/core';
 import { ITransact } from '../ITransact';
 import { ITransaction } from '../ITransaction';
+import { IUserFull } from '../IUserFull';
 import { IUserRegister } from '../IUserRegister';
 
 
@@ -37,6 +38,14 @@ export class DataService {
 
   GetAllTransactions(){
     return this.http.get<ITransaction[]>(`http://localhost:5000/api/Transactions/getall`);
+  }
+  
+  GetUsers(){
+    return this.http.get<IUserFull[]>(`http://localhost:5000/api/User/getusers`);
+  }
+
+  LockUser(userId:string){
+    return this.http.get(`http://localhost:5000/api/User/lock/${userId}`);
   }
 
   DoTransaction(userID:string, transactions:ITransact){

@@ -1,24 +1,71 @@
 <div class="transactionsTable">
-<h2>All Transactions</h2>
-<h4>Inventory Amount: <b>Rs. {{total | number : '0.0-0'}}</b></h4>
-<table class="table table-dark">
-    <thead>
-    <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Date</th>
-        <th scope="col">Amount</th>
-        <th scope="col">Type</th>
-        <th scope="col">UserID</th>
-    </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let transaction of transactions" >
-        <td>{{transaction.id}}</td>
-        <td>{{transaction.created}}</td>
-        <td>{{transaction.amount}}</td>
-        <td>{{transaction.transactionType}}</td>
-        <td>{{transaction.userId}}</td>
-    </tr>
-    </tbody>
-</table>
+    <h2>All Transactions</h2>
+    <h4>Inventory Amount: <b>Rs. {{total | number : '0.0-0'}}</b></h4>
+    <hr>
+    
+    <div class="tables">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6">
+                <div class="tb">
+                    <table class="table table-dark">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">UserID</th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <div class="table-body">
+                        <table class="table table-dark">
+                            <tbody>
+                            <tr *ngFor="let transaction of transactions" >
+                                <td>{{transaction.id}}</td>
+                                <td>{{transaction.created}}</td>
+                                <td>{{transaction.amount}}</td>
+                                <td>{{transaction.transactionType}}</td>
+                                <td>{{transaction.userId}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="tb">
+                    <table class="table table-dark">
+                        <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">UserName</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <div class="table-body">
+                        <table class="table table-dark">
+                            <tbody>
+                            <tr *ngFor="let user of users" class="ls" ngClass="">
+                                <td>{{user.id}}</td>
+                                <td>{{user.firstName}} {{user.lastName}}</td>
+                                <td>{{user.balance}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.userName}}</td>
+                                <td><button class="btn btn-danger" (click)="lockUser(user.id)">Lock</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
 </div>

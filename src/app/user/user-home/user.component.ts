@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ngxCsv } from 'ngx-csv';
@@ -12,11 +12,11 @@ import { DataService } from 'src/app/Service/data.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent {
+export class UserComponent implements OnInit{
 
   tokenPayload:any;
   token:any;
-  transactions:ITransaction[] = Array<ITransaction>();
+  transactions:ITransaction[] = [];
   output:any;
   jwtHelper: JwtHelperService = new JwtHelperService();
   transactionType:string ="D";
@@ -34,11 +34,13 @@ export class UserComponent {
   };
 
   constructor(private authService: AuthService, private dataService: DataService, private router:Router) {
+  }
+  ngOnInit(): void {
     this.refreshUser();
   }
 
   private refreshUser() {
-
+    console.log("User refreshed.")
     if (this.authService.getToken("accessToken") == null) {
       this.router.navigate(['/Login']);
     }
@@ -53,16 +55,16 @@ export class UserComponent {
       this.user = u[0];
       console.log("user: " + this.user);
     });
-
-    this.dataService.GetTransactions(this.userID)
-            .subscribe(l => {
-              this.transactions = [];
-              l.forEach(i=>{
-                this.transactions.push(i);
-              }) 
-            });
+    this.refreshTransactions();
   }
 
+
+  private refreshTransactions() {
+    this.dataService.GetTransactions(this.userID)
+      .subscribe(l => {
+        this.transactions = l;
+      });
+  }
 
   onSubmit() {
     const payload = {

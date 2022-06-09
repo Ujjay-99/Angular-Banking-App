@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   email:string = "";
   password:string = "";
   invalidLogin:boolean = false;
+  errorMessage:string = "";
   constructor(private auth:AuthService, private data:DataService, private router: Router) { }
   ngOnInit(): void {
   }
@@ -30,9 +31,10 @@ export class LoginComponent implements OnInit {
         this.auth.setToken("refreshToken", refreshToken);
         this.invalidLogin = false;
         this.router.navigate(["/UserHome"]);
+        this.errorMessage = (<any>response).error;  
       },
-      error: (err) => {
-        console.error(err)
+      error: (error) => {
+        this.errorMessage = error.error+" "+error.statusText;
         this.invalidLogin = true;
       },
       complete: () => console.log('Login complete')

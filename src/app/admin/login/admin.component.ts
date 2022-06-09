@@ -13,6 +13,7 @@ export class AdminComponent implements OnInit {
   email:string = "";
   password:string = "";
   invalidLogin:boolean = false;
+  errorMessage:string = "";
   constructor(private auth:AuthService, private data:DataService, private router: Router) { }
 
   ngOnInit(): void {
@@ -32,8 +33,8 @@ export class AdminComponent implements OnInit {
         this.invalidLogin = false;
         this.router.navigate(['/HomeAdmin']);
       },
-      error: (err) => {
-        console.error(err)
+      error: (error) => {
+        this.errorMessage = error.error+" "+error.statusText;
         this.invalidLogin = true;
       },
       complete: () => console.log('Login complete')

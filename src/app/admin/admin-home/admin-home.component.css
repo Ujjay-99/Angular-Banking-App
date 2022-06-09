@@ -1,4 +1,21 @@
 .transactionsTable{
-    max-width: 1100px;
     margin: 40px;
+    margin-left: 150px;
+}
+.table-body{
+    max-height: 300px;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-bottom: 20px;
+}
+
+/* .tables{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+} */
+
+.tb{
+    width: 100%;
 }

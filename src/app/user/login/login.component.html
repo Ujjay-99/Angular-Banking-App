@@ -1,7 +1,7 @@
 <section class="vh-100 gradient-custom">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+      <div class="col-14 col-md-6 col-lg-2 col-xl-5">
         <div class="card bg-dark text-white" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
 
@@ -9,13 +9,12 @@
 
               <h2 class="fw-bold mb-2 text-uppercase">User Login</h2>
               <div *ngIf="invalidLogin" class="alert alert-danger">
-                Invalid Username Or Password
+                {{errorMessage}}
               </div>
 
               <div class="form-outline form-white mb-4">
                 <label class="form-label" for="typeEmailX">Email</label>
                 <input type="email" id="typeEmailX" [(ngModel)]="email" class="form-control form-control-lg" placeholder="Enter Email"/>
-                
               </div>
 
               <div class="form-outline form-white mb-4">

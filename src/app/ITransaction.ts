@@ -8,10 +8,3 @@ export interface ITransaction{
     user: IUserRegister,
     userId: string;
 }
-// export interface ITransaction{
-//     amount: number
-//     created: string
-//     id: number
-//     transactionType: string
-//     userId: string
-// }
