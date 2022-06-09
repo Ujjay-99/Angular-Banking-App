@@ -1,11 +1,10 @@
 .container{
-    margin-top: 100px;
-    padding: 20px;
+    margin-top: 50px;
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 100%;
 }
 
 .table-view{
@@ -13,9 +12,9 @@
 }
 
 .name {
-    color: #C81D25;
+    color: #395dff;
     font-weight: 700;
-    text-shadow: 4px 6px 1px rgb(255, 209, 209);
+    text-shadow: 4px 6px 1px rgb(209, 214, 255);
 }
 
 .transact{

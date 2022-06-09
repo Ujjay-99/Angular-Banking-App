@@ -3,8 +3,8 @@
   <h3>Balance: <span class="name">Rs. {{user.balance}}</span></h3>
 
   <div class="container">
-    <div class="row">
-        <div class="col-6">
+    <div class="row" style="width:100%; margin-top:10px;">
+        <div class="col-8">
           <div class="table-view">
             <p><b>Passbook:</b></p>
             <table class="table table-dark">
@@ -28,12 +28,12 @@
             <button type="button" class="btn btn-success" csv-header="['Id', 'Transaction-Id', 'Date','Amount']"(click)="results()">Export csv</button>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-4 transact">
           <div class="card bg-dark text-white" style="border-radius: 1rem;">
             <div class="card-body p-20 text-center">
                 <div class="transact">
                 <label>Enter Amount:</label>
-                <input type="number" placeholder="Enter Amount" [(ngModel)] = 'amount'>
+                <input type="number" class="form-control" placeholder="Enter Amount" [(ngModel)] = 'amount'>
                 <div>
                 <input type="radio"  required name='ttype' value='D' [(ngModel)]='transactionType'>Deposit
                 <input type="radio" required name='ttype' value='W' [(ngModel)]='transactionType'>Withdraw
@@ -45,9 +45,5 @@
         </div>
     </div>
 </div>
-
-
-
-
 </section>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ngxCsv } from 'ngx-csv';
@@ -12,7 +12,7 @@ import { DataService } from 'src/app/Service/data.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit {
+export class UserComponent {
 
   tokenPayload:any;
   token:any;
@@ -34,40 +34,43 @@ export class UserComponent implements OnInit {
   };
 
   constructor(private authService: AuthService, private dataService: DataService, private router:Router) {
-    if(this.authService.getToken("accessToken")==null){
-      this.router.navigate(['/Login'])
+    this.refreshUser();
+  }
+
+  private refreshUser() {
+
+    if (this.authService.getToken("accessToken") == null) {
+      this.router.navigate(['/Login']);
     }
-    this.token = authService.getToken("accessToken");
+    this.token = this.authService.getToken("accessToken");
     this.tokenPayload = JSON.stringify(this.jwtHelper.decodeToken(this.token));
     this.output = JSON.parse(this.tokenPayload);
     this.userID = this.output['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
 
-    console.log("User ID "+ this.userID);
+    console.log("User ID " + this.userID);
 
-    dataService.GetUser(this.output['email']).subscribe(u => {
+    this.dataService.GetUser(this.output['email']).subscribe(u => {
       this.user = u[0];
-      console.log("user: "+ this.user);
+      console.log("user: " + this.user);
     });
-    
-    dataService.GetTransactions(this.userID)
+
+    this.dataService.GetTransactions(this.userID)
             .subscribe(l => {
+              this.transactions = [];
               l.forEach(i=>{
                 this.transactions.push(i);
               }) 
             });
   }
 
-  ngOnInit(): void {
-    
-  }
 
   onSubmit() {
-    console.log("Clicked.");
     const payload = {
       amount: this.amount,
       transactionType: this.transactionType,
     } 
     this.dataService.DoTransaction(this.userID, payload)
+    this.refreshUser();
   }
 
   results(){
