@@ -14,7 +14,7 @@ export class DataService {
 
   CreateUser(register:IUserRegister){  
     console.log(register);  
-    return this.http.post(`http://localhost:5000/api/user/register`, register)
+    return this.http.post(`http://localhost:3492/api/user/register`, register)
   } 
 
   Login(login:any){   
@@ -26,11 +26,11 @@ export class DataService {
   } 
 
   GetUser(email:string){
-    return this.http.get<IUserRegister[]>(`http://localhost:5000/api/User/getByEmail/${email}`)
+    return this.http.get<IUserRegister[]>(`http://localhost:3492/api/User/getByEmail/${email}`)
   }
 
   GetTransactions(UserID:string){
-    return this.http.get<ITransaction[]>(`http://localhost:5000/api/Transactions/getall/${UserID}`)
+    return this.http.get<ITransaction[]>(`http://localhost:3492/api/Transactions/getall/${UserID}`)
   }
 
   GetAllTransactions(){
