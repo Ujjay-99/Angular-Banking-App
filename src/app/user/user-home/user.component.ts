@@ -42,9 +42,11 @@ export class UserComponent implements OnInit {
     this.output = JSON.parse(this.tokenPayload);
     this.userID = this.output['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
 
+    console.log("User ID "+ this.userID);
+
     dataService.GetUser(this.output['email']).subscribe(u => {
       this.user = u[0];
-      
+      console.log("user: "+ this.user);
     });
     
     dataService.GetTransactions(this.userID)
@@ -61,16 +63,13 @@ export class UserComponent implements OnInit {
 
   onSubmit() {
     console.log("Clicked.");
-    
     const payload = {
       amount: this.amount,
-      created: "",
-      id: 0,
       transactionType: this.transactionType,
-      userId: this.userID
-    }
+    } 
     this.dataService.DoTransaction(this.userID, payload)
   }
+
   results(){
     var options = { 
       fieldSeparator: ',',
@@ -83,8 +82,6 @@ export class UserComponent implements OnInit {
       noDownload: false,
       headers: ["Id", "UserId", "Date","Amount","Transaction Type"]
     };
-   
     new ngxCsv(this.transactions, `${this.user.firstName}'s PassBook`, options);
-    // new ngxCsv(this.transactions,  `${this.user.firstName}'s PassBook`);
     }
 }

@@ -26,5 +26,12 @@
         display: inline-block;
     }
     
+  .outlet{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        width: 100%;
+        overflow: hidden;
+    }
 
     
