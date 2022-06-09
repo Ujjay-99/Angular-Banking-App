@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IUserRegister } from 'src/app/IUserRegister';
 import { DataService } from 'src/app/Service/data.service';
 
@@ -17,7 +18,33 @@ export class AdminRegisterComponent implements OnInit {
   ConfirmPassword:string = "";
   IsSucceeded:boolean = false;
 
-
+  adminRegisterForm=new FormGroup({
+    firstNameControl:new FormControl('',[Validators.required]),
+    lastNameControl:new FormControl('',[Validators.required]),
+    emailControl:new FormControl('',[Validators.required]),
+    passControl:new FormControl('',[Validators.required]),
+    cPassControl:new FormControl('',[Validators.required])
+  })
+  adminRegister(){
+    console.warn(this.adminRegisterForm.value);
+    
+  }
+  get firstNameControl(){
+    return this.adminRegisterForm.get('firstNameControl');
+  }
+  get lastNameControl(){
+    return this.adminRegisterForm.get('lastNameControl');
+  }
+   
+  get emailControl(){
+    return this.adminRegisterForm.get('emailControl');
+  }
+  get passControl(){
+    return this.adminRegisterForm.get('passControl');
+  }
+  get cPassControl(){
+    return this.adminRegisterForm.get('cPassControl');
+  }
   constructor(private dataService:DataService) { }
 
   ngOnInit(): void {

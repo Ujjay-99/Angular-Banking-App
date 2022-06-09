@@ -19,6 +19,36 @@ export class RegisterComponent implements OnInit {
   Password:string = "";
   ConfirmPassword:string = "";
   IsSucceeded:boolean = false;
+  userRegisterForm=new FormGroup({
+    firstNameControl:new FormControl('',[Validators.required]),
+    lastNameControl:new FormControl('',[Validators.required]),
+    balanceControl:new FormControl('',[Validators.required]),
+    emailControl:new FormControl('',[Validators.required]),
+    passControl:new FormControl('',[Validators.required]),
+    cPassControl:new FormControl('',[Validators.required])
+  })
+  userRegister(){
+    console.warn(this.userRegisterForm.value);
+    
+  }
+  get firstNameControl(){
+    return this.userRegisterForm.get('firstNameControl');
+  }
+  get lastNameControl(){
+    return this.userRegisterForm.get('lastNameControl');
+  }
+  get balanceControl(){
+    return this.userRegisterForm.get('balanceControl');
+  }  
+  get emailControl(){
+    return this.userRegisterForm.get('emailControl');
+  }
+  get passControl(){
+    return this.userRegisterForm.get('passControl');
+  }
+  get cPassControl(){
+    return this.userRegisterForm.get('cPassControl');
+  }
 
   constructor(private dataService: DataService, private router:Router) { 
     

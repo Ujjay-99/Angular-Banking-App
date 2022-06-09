@@ -15,7 +15,7 @@ export class DataService {
 
   CreateUser(register:IUserRegister){  
     console.log(register);  
-    return this.http.post(`http://localhost:3492/api/user/register`, register);
+    return this.http.post(`http://localhost:5000/api/user/register`, register);
   } 
 
   Login(login:any){   
