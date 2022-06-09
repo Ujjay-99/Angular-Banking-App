@@ -33,6 +33,9 @@ export class UserComponent implements OnInit {
   };
 
   constructor(private authService: AuthService, private dataService: DataService, private router:Router) {
+    if(this.authService.getToken("accessToken")==null){
+      this.router.navigate(['/Login'])
+    }
     this.token = authService.getToken("accessToken");
     this.tokenPayload = JSON.stringify(this.jwtHelper.decodeToken(this.token));
     this.output = JSON.parse(this.tokenPayload);
@@ -52,9 +55,7 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.authService.getToken("accessToken")==null){
-      this.router.navigate(['/Login'])
-    }
+    
   }
 
   onSubmit() {
@@ -62,7 +63,7 @@ export class UserComponent implements OnInit {
     
     const payload = {
       amount: this.amount,
-      created: Date.UTC.toString(),
+      created: "",
       id: 0,
       transactionType: this.transactionType,
       userId: this.userID

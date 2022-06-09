@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { DataService } from 'src/app/Service/data.service';
 import { IUserRegister } from "src/app/IUserRegister";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
   ConfirmPassword:string = "";
   IsSucceeded:boolean = false;
 
-  constructor(private dataService: DataService) { 
+  constructor(private dataService: DataService, private router:Router) { 
     
   }
 
@@ -40,6 +41,7 @@ export class RegisterComponent implements OnInit {
   this.dataService.CreateUser(user).subscribe(u=> {
     this.IsSucceeded = true;
     alert("Registration Successfull.");
+    this.router.navigate(["/Login"]);
   });
   }
 }

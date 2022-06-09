@@ -25,9 +25,11 @@
 <div class="transact">
     <label>Enter Amount:</label>
     <input type="number" placeholder="Enter Amount" [(ngModel)] = 'amount'>
+    <div>
     <input type="radio"  required name='ttype' value='D' [(ngModel)]='transactionType'>Deposit
     <input type="radio" required name='ttype' value='W' [(ngModel)]='transactionType'>Withdraw
-    <button id="signup" class="btn btn Primary" (click)="onSubmit()">Submit</button>
+    </div>
+    <button id="signup" class="btn btn-primary" (click)="onSubmit()">Submit</button>
   </div>
 </section>
 

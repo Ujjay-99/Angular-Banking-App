@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
         this.auth.setToken("accessToken", token);
         this.auth.setToken("refreshToken", refreshToken);
         this.invalidLogin = false;
-        this.router.navigate(["/"]);
+        this.router.navigate(['/HomeAdmin']);
       },
       error: (err) => {
         console.error(err)

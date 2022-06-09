@@ -17,13 +17,11 @@ export class DataService {
     return this.http.post(`http://localhost:5000/api/user/register`, register)
   } 
 
-  Login(login:any){  
-    console.log(login);  
+  Login(login:any){   
     return this.http.post(`http://localhost:5000/api/user/login`, login)
   } 
 
-  AdminLogin(login:any){  
-    console.log(login);  
+  AdminLogin(login:any){   
     return this.http.post(`http://localhost:5000/api/user/adminlogin`, login)
   } 
 
@@ -35,10 +33,13 @@ export class DataService {
     return this.http.get<ITransaction[]>(`http://localhost:5000/api/Transactions/getall/${UserID}`)
   }
 
-  DoTransaction(userID:string, transaction:ITransaction){
-    console.log(userID);
-    console.log(transaction);
+  GetAllTransactions(){
+    return this.http.get<ITransaction[]>(`http://localhost:5000/api/Transactions/getall`)
+  }
+
+  DoTransaction(userID:string, transaction:any){
+    console.log("transaction initiated" + transaction);
     
-    return this.http.post(`http://localhost:5000/api/Transactions/add/${userID}`,transaction)
+    return this.http.post(`http://localhost:5000/api/Transactions/add/${userID}`, transaction)
   }
 }
