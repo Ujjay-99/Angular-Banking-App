@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
+import { FormControl, FormGroup, FormGroupName, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ngxCsv } from 'ngx-csv';
@@ -22,7 +24,19 @@ export class UserComponent implements OnInit{
   transactionType:string ="D";
   amount:number = 0;
   userID:string = "";
-
+ transactionForm=new FormGroup({
+  amountControl:new FormControl('',[Validators.min(500), Validators.max(1000000),Validators.required]),
+  depositRadioControl:new FormControl(),
+  withdrawRadiotControl:new FormControl()
+ })
+ transactValid(){
+   console.warn(this.transactionForm.value);
+   
+ }
+ get amountControl(){
+  return this.transactionForm.get('firstNameControl');
+}
+   
   user:IUserRegister = {
     firstName: "",
     lastName: "",
@@ -32,7 +46,7 @@ export class UserComponent implements OnInit{
     confirmPassword : "",
     role: "",
   };
-
+ 
   constructor(private authService: AuthService, private dataService: DataService, private router:Router) {
   }
   ngOnInit(): void {

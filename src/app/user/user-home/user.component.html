@@ -33,19 +33,22 @@
           </div>
         </div>
         <div class="col-4 transact">
+          <form [formGroup]="transactionForm" (ngSubmit)="transactValid()">
           <div class="card bg-dark text-white" style="border-radius: 1rem;">
             <div class="card-body p-20 text-center">
                 <div class="transact">
                 <label>Enter Amount:</label>
-                <input type="number" class="form-control" placeholder="Enter Amount" [(ngModel)] = 'amount'>
+                <input type="number" class="form-control" placeholder="Enter Amount" [(ngModel)] = 'amount' formControlName="amountControl">
+                <span *ngIf="amountControl && amountControl.invalid && amountControl.touched">Enter Valid Amount</span>
                 <div>
-                <input type="radio"  required name='ttype' value='D' [(ngModel)]='transactionType'>Deposit
-                <input type="radio" required name='ttype' value='W' [(ngModel)]='transactionType'>Withdraw
+                <input type="radio"  required  value='D' [(ngModel)]='transactionType' formControlName="depositRadioControl">Deposit
+                <input type="radio" required  value='W' [(ngModel)]='transactionType' formControlName="withdrawRadiotControl" >Withdraw
                 </div>
-                <button id="signup" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+                <button id="signup" [disabled]="transactionForm.invalid" class="btn btn-primary" (click)="onSubmit()">Submit</button>
               </div>
             </div>
           </div>
+        </form>
         </div>
     </div>
 </div>
