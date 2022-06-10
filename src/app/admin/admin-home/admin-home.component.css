@@ -19,3 +19,8 @@
 .tb{
     width: 100%;
 }
+
+
+td{
+    column-width: 200px;
+}

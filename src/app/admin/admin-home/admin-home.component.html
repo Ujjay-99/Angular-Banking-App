@@ -23,10 +23,10 @@
                         <table class="table table-dark">
                             <tbody>
                             <tr *ngFor="let transaction of transactions" >
-                                <td>{{transaction.id}}</td>
-                                <td>{{transaction.created}}</td>
-                                <td>{{transaction.amount}}</td>
-                                <td>{{transaction.transactionType}}</td>
+                                <td style="column-width: 40px;">{{transaction.id}}</td>
+                                <td style="column-width: 300px;">{{transaction.created | date:'medium'}}</td>
+                                <td style="column-width: 340px;">{{transaction.amount}}</td>
+                                <td style="column-width: 60px;">{{transaction.transactionType}}</td>
                                 <td>{{transaction.userId}}</td>
                             </tr>
                             </tbody>
@@ -39,12 +39,10 @@
                     <table class="table table-dark">
                         <thead>
                         <tr>
-                            <th scope="col">Id</th>
                             <th scope="col">Name</th>
                             <th scope="col">Balance</th>
                             <th scope="col">Email</th>
-                            <th scope="col">UserName</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Id</th>
                         </tr>
                         </thead>
                     </table>
@@ -52,12 +50,11 @@
                         <table class="table table-dark">
                             <tbody>
                             <tr *ngFor="let user of users" class="ls" ngClass="">
-                                <td>{{user.id}}</td>
-                                <td>{{user.firstName}} {{user.lastName}}</td>
-                                <td>{{user.balance}}</td>
+                                <td style="column-width:400px;">{{user.firstName}} {{user.lastName}}</td>
+                                <td style="column-width: 350px;">{{user.balance}}</td>
                                 <td>{{user.email}}</td>
-                                <td>{{user.userName}}</td>
                                 <td><button class="btn btn-danger" (click)="lockUser(user.id)">Lock</button></td>
+                                <td>{{user.id}}</td>
                             </tr>
                             </tbody>
                         </table>
